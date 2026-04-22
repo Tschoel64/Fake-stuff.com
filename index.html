@@ -1,587 +1,595 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Fake-stuff.com :: Forum Index</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fake-stuff.net – how do i make friends. i am new in the area</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-size: 12px;
+      background-color: #c8c8c8;
+      color: #1a1a1a;
+    }
+    a { color: #003fa3; text-decoration: none; }
+    a:hover { text-decoration: underline; color: #cc0000; }
 
-  body {
-    background-color: #8899AA;
-    background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 12px;
-    color: #333;
-  }
+    /* ── Outer wrapper ── */
+    #wrap { max-width: 980px; margin: 0 auto; background: #e8e8e8; border: 1px solid #888; }
 
-  a { color: #006699; text-decoration: none; }
-  a:hover { text-decoration: underline; color: #003399; }
+    /* ── HEADER ── */
+    #header {
+      background: linear-gradient(180deg, #1a3a6b 0%, #0f2347 60%, #2a5298 100%);
+      padding: 10px 14px 8px;
+      border-bottom: 3px solid #f90;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    #header .blink-gif {
+      width: 22px; height: 22px;
+      background: #f90;
+      border: 2px solid #fff;
+      display: inline-block;
+      animation: blink-anim 0.8s step-end infinite;
+      flex-shrink: 0;
+    }
+    @keyframes blink-anim {
+      0%, 100% { background: #f90; }
+      50%       { background: #ff4400; }
+    }
+    #header h1 {
+      font-style: italic;
+      font-weight: bold;
+      font-size: 22px;
+      color: #fff;
+      text-shadow: 2px 2px 4px #000, 0 0 8px #f904;
+      letter-spacing: 1px;
+      flex: 1;
+    }
+    #header h1 span { color: #f90; }
+    #header .tagline {
+      color: #aac4f0;
+      font-size: 10px;
+      font-style: italic;
+      width: 100%;
+    }
 
-  /* HEADER */
-  #header {
-    background: linear-gradient(180deg, #1a3a5c 0%, #0d2640 60%, #0a1e33 100%);
-    border-bottom: 3px solid #f90;
-  }
-  #header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 14px;
-  }
-  #logo-text {
-    font-size: 30px;
-    font-weight: 900;
-    font-style: italic;
-    color: #fff;
-    text-shadow: 2px 2px 0 #f90, 3px 3px 0 #c60;
-    letter-spacing: -1px;
-    font-family: 'Impact', 'Arial Black', sans-serif;
-  }
-  #logo-sub {
-    font-size: 11px;
-    color: #aac;
-    font-style: italic;
-    margin-top: 3px;
-  }
-  .blink {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    background: #f90;
-    border-radius: 50%;
-    animation: blink 1s step-start infinite;
-    margin-right: 10px;
-    vertical-align: middle;
-  }
-  @keyframes blink { 50% { opacity: 0; } }
+    /* ── NAV BAR ── */
+    #navbar {
+      background: #2e4b7a;
+      padding: 4px 10px;
+      border-bottom: 2px solid #1a2f55;
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    #navbar a {
+      color: #d0ddff;
+      font-size: 11px;
+      padding: 2px 8px;
+      border: 1px solid transparent;
+      border-radius: 2px;
+    }
+    #navbar a:hover {
+      background: #1a3a6b;
+      border-color: #f90;
+      color: #fff;
+      text-decoration: none;
+    }
+    #navbar .sep { color: #6688bb; font-size: 11px; }
 
-  #header-nav {
-    background: #0f2b47;
-    border-top: 1px solid #1e5080;
-    padding: 4px 14px;
-    display: flex;
-    gap: 4px;
-    flex-wrap: wrap;
-  }
-  #header-nav a {
-    color: #cce4ff;
-    font-size: 11px;
-    padding: 2px 8px;
-    border-right: 1px solid #2a5a80;
-  }
-  #header-nav a:last-child { border-right: none; }
-  #header-nav a:hover { color: #fff; background: #1e5080; }
+    /* ── BREADCRUMB ── */
+    #breadcrumb {
+      background: #d5dce8;
+      padding: 5px 10px;
+      font-size: 11px;
+      border-bottom: 1px solid #aab;
+      color: #444;
+    }
+    #breadcrumb a { font-weight: bold; }
 
-  #user-bar {
-    background: #e8f0f8;
-    border-bottom: 1px solid #b0c8e0;
-    padding: 3px 14px;
-    font-size: 11px;
-    color: #555;
-    text-align: right;
-  }
+    /* ── THREAD HEADER ── */
+    #thread-header {
+      background: #3a5fa0;
+      color: #fff;
+      padding: 8px 10px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 2px solid #1a2f55;
+    }
+    #thread-header h2 {
+      flex: 1;
+      font-size: 14px;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px #000;
+    }
+    #thread-header .thread-meta {
+      font-size: 10px;
+      color: #c0d0f0;
+      white-space: nowrap;
+    }
+    #thread-header .btn-reply {
+      background: #f90;
+      color: #000;
+      font-weight: bold;
+      font-size: 11px;
+      padding: 4px 10px;
+      border: 2px outset #ffc;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    #thread-header .btn-reply:hover { background: #ff6600; color: #fff; text-decoration: none; }
 
-  /* WRAP */
-  #wrap {
-    max-width: 900px;
-    margin: 10px auto;
-  }
+    /* ── POST TABLE ── */
+    .post-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #888;
+      margin-bottom: 0;
+    }
+    .post-row { background: #f0f0f0; }
+    .post-row.alt { background: #e4ecf7; }
+    .post-row.robot-post { background: #f0f5e4; }
+    .post-row.robot-post .post-body-cell { border-left: 4px solid #5a9a1a; }
 
-  /* WELCOME BANNER */
-  #welcome {
-    background: linear-gradient(180deg, #fffbe8 0%, #fff3c8 100%);
-    border: 1px solid #e0c840;
-    border-left: 4px solid #f90;
-    padding: 8px 12px;
-    margin-bottom: 10px;
-    font-size: 11px;
-    color: #554400;
-    line-height: 1.6;
-  }
-  #welcome strong { color: #883300; }
+    .post-userinfo {
+      width: 130px;
+      min-width: 110px;
+      max-width: 140px;
+      vertical-align: top;
+      padding: 8px 6px;
+      background: inherit;
+      border-right: 1px solid #aab;
+      border-bottom: 1px solid #ccc;
+      text-align: center;
+    }
+    .post-body-cell {
+      vertical-align: top;
+      padding: 8px 10px 4px;
+      border-bottom: 1px solid #ccc;
+    }
 
-  /* CATEGORY BLOCK */
-  .category {
-    margin-bottom: 12px;
-    border: 1px solid #6688aa;
-  }
+    /* ── Avatar ── */
+    .avatar {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin: 0 auto 4px;
+      border: 2px solid #888;
+      border-radius: 3px;
+      background: #c8d8f0;
+      font-weight: bold;
+      line-height: 1;
+      user-select: none;
+    }
+    .avatar.charlie  { background: #f7d47a; border-color: #c8960a; }
+    .avatar.pim      { background: #f7a0c0; border-color: #cc3366; }
+    .avatar.glep     { background: #b0d8b0; border-color: #3a8a3a; }
+    .avatar.boss     { background: #c8c0d8; border-color: #5a4a88; }
+    .avatar.alan      { background: #d8c0a8; border-color: #8a5a2a; }
+    .avatar.neighbour { background: #e8e8d8; border-color: #888870; }
+    .avatar.shrimp   { background: #f0d0b0; border-color: #c04000; }
+    .avatar.robot    { background: #c8e8c8; border-color: #2a7a2a; font-size: 30px; }
 
-  .category-header {
-    background: linear-gradient(180deg, #1a3a5c 0%, #0d2640 100%);
-    padding: 6px 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .category-header-title {
-    color: #fff;
-    font-size: 13px;
-    font-weight: bold;
-    font-family: Verdana, sans-serif;
-  }
-  .category-header-cols {
-    display: flex;
-    gap: 0;
-    color: #aac8e8;
-    font-size: 10px;
-    text-align: center;
-  }
-  .category-header-cols span {
-    width: 80px;
-    text-align: center;
-  }
+    /* User info text */
+    .uname {
+      font-weight: bold;
+      font-size: 11px;
+      color: #003fa3;
+      word-break: break-all;
+    }
+    .uname.robot { color: #2a7a2a; }
+    .urank {
+      font-size: 9px;
+      color: #555;
+      font-style: italic;
+      margin-top: 1px;
+    }
+    .uposts {
+      font-size: 9px;
+      color: #666;
+      margin-top: 2px;
+    }
+    .ubadge {
+      display: inline-block;
+      margin-top: 3px;
+      font-size: 8px;
+      padding: 1px 4px;
+      border-radius: 2px;
+      font-weight: bold;
+    }
+    .badge-gold    { background: #f90; color: #000; border: 1px solid #c60; }
+    .badge-silver  { background: #ccc; color: #333; border: 1px solid #999; }
+    .badge-blue    { background: #3a70cc; color: #fff; border: 1px solid #1a3a9a; }
+    .badge-green   { background: #3a9a3a; color: #fff; border: 1px solid #1a5a1a; }
+    .badge-red     { background: #cc2200; color: #fff; border: 1px solid #880000; }
+    .badge-purple  { background: #7a2acc; color: #fff; border: 1px solid #4a0a88; }
 
-  /* FORUM ROW */
-  .forum-row {
-    background: #fff;
-    border-bottom: 1px solid #c8d8ec;
-    display: flex;
-    align-items: center;
-    padding: 7px 10px;
-    gap: 10px;
-  }
-  .forum-row:nth-child(even) { background: #f4f8fc; }
-  .forum-row:last-child { border-bottom: none; }
+    /* ── Post body ── */
+    .post-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px dashed #bbb;
+    }
+    .post-num {
+      font-size: 10px;
+      color: #888;
+      font-weight: bold;
+    }
+    .post-num a { color: #888; }
+    .post-date {
+      font-size: 10px;
+      color: #666;
+    }
+    .post-actions {
+      font-size: 10px;
+      display: flex;
+      gap: 6px;
+    }
+    .post-actions a {
+      background: #d8d8e8;
+      border: 1px outset #aaa;
+      padding: 1px 5px;
+      color: #333;
+      font-size: 10px;
+    }
+    .post-actions a:hover { background: #b8b8d0; text-decoration: none; }
 
-  .forum-icon {
-    width: 28px;
-    height: 28px;
-    min-width: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-  }
-  .forum-icon.new {
-    border: 2px solid #f90;
-    border-radius: 3px;
-  }
+    .post-content {
+      font-size: 12px;
+      line-height: 1.6;
+      color: #1a1a1a;
+      padding: 4px 0 8px;
+    }
+    .post-content p { margin-bottom: 6px; }
+    .post-content .quote-block {
+      background: #dde8f4;
+      border-left: 3px solid #3a70cc;
+      padding: 4px 8px;
+      margin: 6px 0;
+      font-size: 11px;
+      color: #333;
+    }
+    .post-content .quote-block .qauthor {
+      font-weight: bold;
+      color: #003fa3;
+      font-size: 10px;
+      margin-bottom: 2px;
+    }
+    .post-content em { color: #cc0000; font-style: italic; }
+    .post-content strong { color: #003366; }
+    .robot-text { color: #2a7a2a; font-family: 'Courier New', Courier, monospace; }
+    .robot-slip { color: #cc2200; font-style: italic; font-weight: bold; }
+    .hindi-slip { color: #7a2acc; font-weight: bold; font-style: italic; }
+    .strikethrough { text-decoration: line-through; color: #999; }
 
-  .forum-info { flex: 1; }
-  .forum-name {
-    font-size: 13px;
-    font-weight: bold;
-    color: #003366;
-  }
-  .forum-name:hover { text-decoration: underline; cursor: pointer; }
-  .forum-desc {
-    font-size: 10px;
-    color: #667788;
-    margin-top: 2px;
-  }
-  .forum-moderator {
-    font-size: 10px;
-    color: #999;
-    margin-top: 2px;
-  }
-  .forum-moderator a { color: #557799; }
+    /* ── Likes bar ── */
+    .post-likes {
+      background: #eef4e8;
+      border: 1px solid #b8d8a0;
+      border-radius: 2px;
+      padding: 3px 7px;
+      margin: 4px 0;
+      font-size: 10px;
+      color: #3a6a1a;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .post-likes .like-icon { font-size: 12px; }
+    .post-likes .like-who { font-weight: bold; color: #003fa3; }
 
-  .forum-stats {
-    width: 80px;
-    text-align: center;
-    font-size: 11px;
-    color: #445;
-  }
-  .forum-stats .num {
-    font-size: 13px;
-    font-weight: bold;
-    color: #003366;
-    display: block;
-  }
+    /* ── Signature ── */
+    .post-sig {
+      font-size: 10px;
+      color: #888;
+      border-top: 1px solid #ccc;
+      padding-top: 4px;
+      margin-top: 4px;
+      font-style: italic;
+    }
 
-  .forum-lastpost {
-    width: 200px;
-    font-size: 10px;
-    color: #667;
-    line-height: 1.5;
-    border-left: 1px solid #dde8f4;
-    padding-left: 10px;
-  }
-  .forum-lastpost .lp-title {
-    color: #003366;
-    font-weight: bold;
-    font-size: 10px;
-  }
-  .forum-lastpost .lp-meta { color: #889; }
+    /* ── Divider header between sections ── */
+    .section-divider {
+      background: #2e4b7a;
+      color: #c0d0ff;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 3px 10px;
+      border-top: 1px solid #1a2f55;
+      border-bottom: 1px solid #1a2f55;
+    }
 
-  /* SUBFORUMS */
-  .subforum-list {
-    font-size: 10px;
-    color: #667;
-    margin-top: 3px;
-  }
-  .subforum-list a {
-    color: #006699;
-    margin-right: 4px;
-  }
+    /* ── Reply form ── */
+    #reply-box {
+      background: #e0e8f4;
+      border: 1px solid #aab;
+      margin: 10px 6px;
+      padding: 8px;
+    }
+    #reply-box h3 {
+      font-size: 13px;
+      color: #1a3a6b;
+      margin-bottom: 6px;
+      border-bottom: 1px solid #aab;
+      padding-bottom: 4px;
+    }
+    #reply-box .toolbar {
+      background: #d0d8e8;
+      border: 1px solid #aab;
+      padding: 3px 6px;
+      margin-bottom: 4px;
+      display: flex;
+      gap: 3px;
+      flex-wrap: wrap;
+    }
+    #reply-box .toolbar button {
+      font-size: 10px;
+      font-weight: bold;
+      padding: 1px 6px;
+      border: 1px outset #888;
+      background: #f0f0f0;
+      cursor: not-allowed;
+      color: #333;
+    }
+    #reply-box textarea {
+      width: 100%;
+      height: 90px;
+      font-family: Verdana, sans-serif;
+      font-size: 12px;
+      border: 1px inset #888;
+      background: #fff;
+      padding: 4px;
+      resize: vertical;
+    }
+    #reply-box .form-btns {
+      margin-top: 6px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    #reply-box .form-btns button {
+      font-size: 11px;
+      font-weight: bold;
+      padding: 4px 14px;
+      border: 2px outset #aaa;
+      cursor: not-allowed;
+    }
+    #reply-box .form-btns .btn-submit { background: #3a70cc; color: #fff; border-color: #1a3a9a; }
+    #reply-box .form-btns .btn-preview { background: #e8e8e0; color: #333; }
 
-  /* STATS FOOTER */
-  #forum-stats-bar {
-    background: linear-gradient(180deg, #dce8f5 0%, #c8d8ec 100%);
-    border: 1px solid #9ab5d0;
-    padding: 7px 12px;
-    font-size: 11px;
-    color: #445;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  #forum-stats-bar strong { color: #003366; }
+    /* ── Footer ── */
+    #footer {
+      background: #1a3a6b;
+      color: #aac4f0;
+      font-size: 10px;
+      text-align: center;
+      padding: 6px 10px;
+      border-top: 3px solid #f90;
+    }
+    #footer a { color: #f90; }
 
-  /* ONLINE USERS */
-  #online-box {
-    background: #fff;
-    border: 1px solid #9ab5d0;
-    margin-bottom: 10px;
-  }
-  #online-header {
-    background: linear-gradient(180deg, #3a6a9c 0%, #2a5a8c 100%);
-    padding: 4px 10px;
-    color: #fff;
-    font-size: 11px;
-    font-weight: bold;
-  }
-  #online-body {
-    padding: 6px 10px;
-    font-size: 11px;
-    color: #445;
-    line-height: 1.7;
-  }
-
-  /* BIRTHDAYS / ANNOUNCEMENTS */
-  #announce-box {
-    background: #fff8e8;
-    border: 1px solid #e0c840;
-    margin-bottom: 10px;
-    font-size: 11px;
-  }
-  #announce-header {
-    background: linear-gradient(180deg, #c07800 0%, #a06000 100%);
-    padding: 4px 10px;
-    color: #fff;
-    font-size: 11px;
-    font-weight: bold;
-  }
-  #announce-body { padding: 6px 10px; color: #554400; line-height: 1.7; }
-
-  /* FOOTER */
-  #forum-footer {
-    background: linear-gradient(180deg, #d0dcea 0%, #c0cedd 100%);
-    border: 1px solid #9ab5d0;
-    padding: 8px 12px;
-    font-size: 10px;
-    color: #557;
-    text-align: center;
-    line-height: 1.8;
-  }
-
-  .new-badge {
-    display: inline-block;
-    background: #cc2200;
-    color: #fff;
-    font-size: 8px;
-    font-weight: bold;
-    padding: 1px 4px;
-    border-radius: 2px;
-    margin-left: 4px;
-    vertical-align: middle;
-    text-transform: uppercase;
-  }
-</style>
+    /* ── MOBILE ── */
+    @media (max-width: 600px) {
+      #header h1 { font-size: 16px; }
+      .post-userinfo {
+        width: 90px;
+        min-width: 80px;
+        padding: 5px 3px;
+      }
+      .avatar { width: 46px; height: 46px; font-size: 18px; }
+      .uname { font-size: 9px; }
+      .urank, .uposts, .ubadge { font-size: 8px; }
+      .post-content { font-size: 11px; }
+      #thread-header h2 { font-size: 12px; }
+      .post-actions a { padding: 1px 3px; }
+      #reply-box { margin: 6px 2px; }
+    }
+    @media (max-width: 420px) {
+      #navbar a { font-size: 10px; padding: 2px 4px; }
+      .post-header { flex-direction: column; align-items: flex-start; }
+      .post-actions { flex-wrap: wrap; }
+    }
+  </style>
 </head>
 <body>
-
-<div id="header">
-  <div id="header-inner">
-    <div>
-      <div style="display:flex; align-items:center;">
-        <span class="blink"></span>
-        <span id="logo-text">Fake-stuff.com</span>
-      </div>
-      <div id="logo-sub">your #1 source of information on the internet</div>
-    </div>
-    <div style="text-align:right; color:#aac8e8; font-size:11px; line-height:1.8;">
-      Welcome back, <strong style="color:#f90;">GuestUser</strong><br>
-      <a href="#" style="color:#aac8e8;">My Profile</a> &nbsp;|&nbsp;
-      <a href="#" style="color:#aac8e8;">Messages (3)</a> &nbsp;|&nbsp;
-      <a href="#" style="color:#aac8e8;">Log Out</a>
-    </div>
-  </div>
-  <div id="header-nav">
-    <a href="#">Home</a>
-    <a href="#">Forum Index</a>
-    <a href="#">General Chat</a>
-    <a href="#">Relationships & Social Life</a>
-    <a href="#">Conspiracy Corner</a>
-    <a href="#">Marketplace</a>
-    <a href="#">FAQ</a>
-    <a href="#">Search</a>
-    <a href="#">Members</a>
-    <a href="#">Profile</a>
-  </div>
-</div>
-
-<div id="user-bar">
-  It is currently <strong>April 3, 2026, 5:58 PM</strong> &nbsp;|&nbsp; All times are UTC &nbsp;|&nbsp; <a href="#">Register</a> &nbsp;|&nbsp; <a href="#">Log In</a>
-</div>
-
 <div id="wrap">
 
-  <!-- WELCOME BANNER -->
-  <div id="welcome">
-    <strong>Welcome to Fake-stuff.com</strong> — your #1 source of information on the internet. Whether it's real, fake, or somewhere in between, you'll find it discussed here. Please read the <a href="#">rules</a> before posting. Play nice.
+  <!-- ══ HEADER ══ -->
+  <div id="header">
+    <span class="blink-gif" title="[UNDER CONSTRUCTION]"></span>
+    <h1><span>Fake</span>-stuff<span>.net</span></h1>
+    <div class="tagline">The Internet's #1 Source For Information</div>
   </div>
 
-  <!-- ANNOUNCEMENTS -->
-  <div id="announce-box">
-    <div id="announce-header">📢 Board Announcements</div>
-    <div id="announce-body">
-      <strong>[ADMIN]</strong> Server maintenance scheduled for April 9. Forum will be down 2–4 AM UTC. — <em>TheBoss_Official</em><br>
-      <strong>[MOD]</strong> Reminder: the Conspiracy Corner has a strict no-evidence policy. Keep speculation pure. — <em>Mod_Veronica</em>
-    </div>
+  <!-- ══ NAVBAR ══ -->
+  <div id="navbar">
+    <a href="#">Home</a><span class="sep">|</span>
+    <a href="#">Forum Index</a><span class="sep">|</span>
+    <a href="#">Search</a><span class="sep">|</span>
+    <a href="#">FAQ</a><span class="sep">|</span>
+    <a href="#">Memberlist</a><span class="sep">|</span>
+    <a href="#">Usergroups</a><span class="sep">|</span>
+    <a href="#">Register</a><span class="sep">|</span>
+    <a href="#">Profile</a><span class="sep">|</span>
+    <a href="#">Log in</a>
   </div>
 
-  <!-- CATEGORY 1: GENERAL -->
-  <div class="category">
-    <div class="category-header">
-      <div class="category-header-title">General Discussion</div>
-      <div class="category-header-cols">
-        <span>Topics</span>
-        <span>Posts</span>
-        <span style="width:200px;">Last Post</span>
-      </div>
-    </div>
-
-    <div class="forum-row">
-      <div class="forum-icon new">💬</div>
-      <div class="forum-info">
-        <div class="forum-name"><a href="#">General Chat</a> <span class="new-badge">NEW</span></div>
-        <div class="forum-desc">Talk about anything. Absolutely anything. We mean that.</div>
-        <div class="forum-moderator">Moderator: <a href="#">Mod_Veronica</a></div>
-      </div>
-      <div class="forum-stats"><span class="num">3,847</span>Topics</div>
-      <div class="forum-stats"><span class="num">41,209</span>Posts</div>
-      <div class="forum-lastpost">
-        <div class="lp-title"><a href="#">anyone else smell something weird near</a></div>
-        <div class="lp-meta">by <a href="#">ShrimpGod69</a><br>Apr 3, 2026 — 5:41 PM</div>
-      </div>
-    </div>
-
-    <div class="forum-row">
-      <div class="forum-icon">📰</div>
-      <div class="forum-info">
-        <div class="forum-name"><a href="#">News & Current Events</a></div>
-        <div class="forum-desc">Real news, fake news, and everything in between. You decide which is which.</div>
-        <div class="forum-moderator">Moderator: <a href="#">TheBoss_Official</a></div>
-      </div>
-      <div class="forum-stats"><span class="num">1,204</span>Topics</div>
-      <div class="forum-stats"><span class="num">18,553</span>Posts</div>
-      <div class="forum-lastpost">
-        <div class="lp-title"><a href="#">is the moon getting bigger or is it just me</a></div>
-        <div class="lp-meta">by <a href="#">PimPimPim</a><br>Apr 3, 2026 — 3:12 PM</div>
-      </div>
-    </div>
-
-    <div class="forum-row">
-      <div class="forum-icon new">❤️</div>
-      <div class="forum-info">
-        <div class="forum-name"><a href="#">Relationships &amp; Social Life</a> <span class="new-badge">NEW</span></div>
-        <div class="forum-desc">Advice on friends, family, romance, and neighbours. Mostly neighbours recently for some reason.</div>
-        <div class="subforum-list">Subforums: <a href="#">Dating Advice</a> <a href="#">Making Friends</a> <a href="#">Family Problems</a></div>
-        <div class="forum-moderator">Moderator: <a href="#">Charlie_Smiles</a></div>
-      </div>
-      <div class="forum-stats"><span class="num">892</span>Topics</div>
-      <div class="forum-stats"><span class="num">9,341</span>Posts</div>
-      <div class="forum-lastpost">
-        <div class="lp-title"><a href="#">i really want to be friends with my new neighbour. any tips</a></div>
-        <div class="lp-meta">by <a href="#">AllensNeighbour</a><br>Apr 3, 2026 — 6:12 PM</div>
-      </div>
-    </div>
-
+  <!-- ══ BREADCRUMB ══ -->
+  <div id="breadcrumb">
+    <a href="#">Fake-stuff.net</a> &raquo; <a href="#">General</a> &raquo; <a href="#">Advice &amp; Life</a> &raquo; <strong>how do i make friends. i am new in the area</strong>
   </div>
 
-  <!-- CATEGORY 2: HOBBIES -->
-  <div class="category">
-    <div class="category-header">
-      <div class="category-header-title">Hobbies & Interests</div>
-      <div class="category-header-cols">
-        <span>Topics</span>
-        <span>Posts</span>
-        <span style="width:200px;">Last Post</span>
-      </div>
-    </div>
-
-    <div class="forum-row">
-      <div class="forum-icon">🎨</div>
-      <div class="forum-info">
-        <div class="forum-name"><a href="#">Art & Creative</a></div>
-        <div class="forum-desc">Share your artwork, writing, music, and other creative endeavours. AI art will be tolerated but judged.</div>
-        <div class="forum-moderator">Moderator: <a href="#">AlanNotARobot</a></div>
-      </div>
-      <div class="forum-stats"><span class="num">2,103</span>Topics</div>
-      <div class="forum-stats"><span class="num">14,887</span>Posts</div>
-      <div class="forum-lastpost">
-        <div class="lp-title"><a href="#">rate my painting (its of a dog eating a hotdog)</a></div>
-        <div class="lp-meta">by <a href="#">AlanNotARobot</a><br>Apr 2, 2026 — 11:50 PM</div>
-      </div>
-    </div>
-
-    <div class="forum-row">
-      <div class="forum-icon">🤖</div>
-      <div class="forum-info">
-        <div class="forum-name"><a href="#">Robots &amp; Technology</a></div>
-        <div class="forum-desc">Discussion of robots, AI, gadgets, and the slow march of machines into every part of our lives.</div>
-        <div class="subforum-list">Subforums: <a href="#">AI Discussion</a> <a href="#">Build Your Own Robot</a> <a href="#">Robot Costumes</a></div>
-        <div class="forum-moderator">Moderator: <a href="#">TheBoss_Official</a></div>
-      </div>
-      <div class="forum-stats"><span class="num">744</span>Topics</div>
-      <div class="forum-stats"><span class="num">6,210</span>Posts</div>
-      <div class="forum-lastpost">
-        <div class="lp-title"><a href="#">best free AI tools rn (updated list)</a></div>
-        <div class="lp-meta">by <a href="#">Charlie_Smiles</a><br>Apr 1, 2026 — 2:33 PM</div>
-      </div>
-    </div>
-
-    <div class="forum-row">
-      <div class="forum-icon">🏏</div>
-      <div class="forum-info">
-        <div class="forum-name"><a href="#">Sports</a></div>
-        <div class="forum-desc">All sports. Cricket discussion is especially active for reasons nobody has explained.</div>
-        <div class="forum-moderator">Moderator: <a href="#">Mod_Veronica</a></div>
-      </div>
-      <div class="forum-stats"><span class="num">1,556</span>Topics</div>
-      <div class="forum-stats"><span class="num">21,004</span>Posts</div>
-      <div class="forum-lastpost">
-        <div class="lp-title"><a href="#">cricket is the greatest sport ever invented, discuss</a></div>
-        <div class="lp-meta">by <a href="#">JustBob_NotARobot</a><br>Apr 2, 2026 — 8:14 PM</div>
-      </div>
-    </div>
-
+  <!-- ══ THREAD HEADER ══ -->
+  <div id="thread-header">
+    <h2>How do I become friends with my neighbor?</h2>
+    <div class="thread-meta">Views: 892 &nbsp;|&nbsp; Replies: 3</div>
+    <a class="btn-reply" href="#">+ Reply to Thread</a>
   </div>
 
-  <!-- CATEGORY 3: CONSPIRACY -->
-  <div class="category">
-    <div class="category-header">
-      <div class="category-header-title">Conspiracy Corner</div>
-      <div class="category-header-cols">
-        <span>Topics</span>
-        <span>Posts</span>
-        <span style="width:200px;">Last Post</span>
-      </div>
-    </div>
+  <!-- ══ POSTS ══ -->
+  <table class="post-table">
 
-    <div class="forum-row">
-      <div class="forum-icon">🔍</div>
-      <div class="forum-info">
-        <div class="forum-name"><a href="#">Conspiracy Theories</a></div>
-        <div class="forum-desc">Evidence not required. Punctuation optional. Passion mandatory.</div>
-        <div class="forum-moderator">Moderator: <a href="#">GlepGlopGlorp</a></div>
-      </div>
-      <div class="forum-stats"><span class="num">5,921</span>Topics</div>
-      <div class="forum-stats"><span class="num">89,340</span>Posts</div>
-      <div class="forum-lastpost">
-        <div class="lp-title"><a href="#">what if everything is glep</a></div>
-        <div class="lp-meta">by <a href="#">GlepGlopGlorp</a><br>Apr 3, 2026 — 4:59 PM</div>
-      </div>
-    </div>
+    <!-- ───────────── POST #1 – AllensNeighbour ───────────── -->
+    <tr class="post-row">
+      <td class="post-userinfo">
+        <div class="avatar neighbour">🏠</div>
+        <div class="uname">AllensNeighbour</div>
+        <div class="urank">New Member</div>
+        <div class="uposts">Posts: 4</div>
+        <span class="ubadge badge-silver">Newbie</span>
+      </td>
+      <td class="post-body-cell">
+        <div class="post-header">
+          <span class="post-num"><a href="#">#1</a></span>
+          <span class="post-date">April 3, 2007 – 18:12</span>
+          <span class="post-actions">
+            <a href="#" title="Quote this post">Quote</a>
+            <a href="#" title="Report this post">Report</a>
+          </span>
+        </div>
+        <div class="post-content">
+          <p>Hello. A guy named Allan just moved in next door to me. I really want to be his friend. Like I think about it genuinely quite a lot. The problem is he does not really notice me. I have said hi twice since he moved in and both times he just nodded and kept walking. Do you think he hates me? Does anyone have any tips on how to befriend him?</p>
+        </div>
+        <div class="post-sig"></div>
+      </td>
+    </tr>
 
-    <div class="forum-row">
-      <div class="forum-icon">🕵️</div>
-      <div class="forum-info">
-        <div class="forum-name"><a href="#">Investigations &amp; Exposés</a></div>
-        <div class="forum-desc">Something seems off? Post your evidence here. We will take it very seriously.</div>
-        <div class="forum-moderator">Moderator: <a href="#">AlanNotARobot</a></div>
-      </div>
-      <div class="forum-stats"><span class="num">388</span>Topics</div>
-      <div class="forum-stats"><span class="num">4,102</span>Posts</div>
-      <div class="forum-lastpost">
-        <div class="lp-title"><a href="#">server room smells like food and nobody will explain why</a></div>
-        <div class="lp-meta">by <a href="#">AlanNotARobot</a><br>Apr 3, 2026 — 1:07 PM</div>
-      </div>
-    </div>
+    <!-- ───────────── POST #2 – TheBoss_Official ───────────── -->
+    <tr class="post-row alt">
+      <td class="post-userinfo">
+        <div class="avatar boss">💼</div>
+        <div class="uname">TheBoss_Official</div>
+        <div class="urank">OOGLY GOO</div>
+        <div class="uposts">Posts: 14,221</div>
+        <span class="ubadge badge-purple">CEO</span>
+      </td>
+      <td class="post-body-cell">
+        <div class="post-header">
+          <span class="post-num"><a href="#">#2</a></span>
+          <span class="post-date">April 3, 2007 – 18:40</span>
+          <span class="post-actions">
+            <a href="#">Quote</a>
+            <a href="#">Report</a>
+          </span>
+        </div>
+        <div class="post-content">
+          <p>Yes. Listen carefully.</p>
+          <p><strong>Step one:</strong> Pretend you are a robot. Walk into his house. When they ask who you are, say you are there to help. Do not elaborate. Begin helping immediately. Fix something. Answer an email. Print a photograph of someone as a hot dog if they mention. Do not stop until they stop asking you to stop, which they will.</p>
+          <p><strong>Step two:</strong> use every available tool at your disposal. You do not need to know things. You only need to find the answer and deliver it in a confident voice. The voice is important.</p>
+          <p><strong>Step three:</strong> make their lunch. Make it correctly. This is more powerful than anything else on this list. Nobody in the history of human civilization has correctly made Glep's lunch order. If you can do that, you will have a friend for life.</p>
+          <p><strong>Step four:</strong> when they tell you to leave, do not leave. That is how it works.</p>
+        </div>
+        <div class="post-likes"><span class="like-icon">👍</span> <span class="like-who">Bob</span> likes this post.</div>
+        <div class="post-sig">– TheBoss | CEO, S.F. Inc. | "Productivity is not a suggestion."</div>
+      </td>
+    </tr>
 
+    <!-- ───────────── POST #3 – AllensNeighbour (reply) ───────────── -->
+    <tr class="post-row">
+      <td class="post-userinfo">
+        <div class="avatar neighbour">🏠</div>
+        <div class="uname">AllensNeighbour</div>
+        <div class="urank">New Member</div>
+        <div class="uposts">Posts: 1</div>
+        <span class="ubadge badge-silver">Newbie</span>
+      </td>
+      <td class="post-body-cell">
+        <div class="post-header">
+          <span class="post-num"><a href="#">#3</a></span>
+          <span class="post-date">April 3, 2007 – 19:01</span>
+          <span class="post-actions">
+            <a href="#">Quote</a>
+            <a href="#">Report</a>
+          </span>
+        </div>
+        <div class="post-content">
+          <p>Thank you. I should try that sometime. Who is Glep?</p>
+        </div>
+        <div class="post-sig"></div>
+      </td>
+    </tr>
+
+    <!-- ───────────── POST #4 – TheBoss_Official (reply) ───────────── -->
+    <tr class="post-row alt">
+      <td class="post-userinfo">
+        <div class="avatar boss">💼</div>
+        <div class="uname">TheBoss_Official</div>
+        <div class="urank">OOGLY GOO</div>
+        <div class="uposts">Posts: 14,221</div>
+        <span class="ubadge badge-purple">CEO</span>
+      </td>
+      <td class="post-body-cell">
+        <div class="post-header">
+          <span class="post-num"><a href="#">#4</a></span>
+          <span class="post-date">April 3, 2007 – 19:04</span>
+          <span class="post-actions">
+            <a href="#">Quote</a>
+            <a href="#">Report</a>
+          </span>
+        </div>
+        <div class="post-content">
+          <p>Doesn't matter.</p>
+        </div>
+        <div class="post-sig">– TheBoss | CEO, S.F. Inc. | "Productivity is not a suggestion."</div>
+      </td>
+    </tr>
+
+  </table>
+
+  <!-- ══ PAGE NAV ══ -->
+  <div style="background:#d5dce8; padding:5px 10px; font-size:11px; border-top:1px solid #aab; border-bottom:1px solid #aab; display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+    <strong>Page:</strong>
+    <a href="#" style="background:#3a70cc; color:#fff; padding:1px 6px; font-weight:bold; border:1px solid #1a3a9a;">1</a>
+    &nbsp;&nbsp;
+    <a class="btn-reply" href="#" style="background:#f90; color:#000; font-weight:bold; font-size:11px; padding:3px 10px; border:2px outset #ffc;">+ Reply to Thread</a>
   </div>
 
-  <!-- CATEGORY 4: MARKETPLACE -->
-  <div class="category">
-    <div class="category-header">
-      <div class="category-header-title">Marketplace</div>
-      <div class="category-header-cols">
-        <span>Topics</span>
-        <span>Posts</span>
-        <span style="width:200px;">Last Post</span>
-      </div>
+  <!-- ══ REPLY FORM ══ -->
+  <div id="reply-box">
+    <h3>Post a Reply</h3>
+    <div class="toolbar">
+      <button title="Bold">B</button>
+      <button title="Italic"><em>I</em></button>
+      <button title="Underline"><u>U</u></button>
+      <button title="Quote">[Quote]</button>
+      <button title="Code">[Code]</button>
+      <button title="Image">[IMG]</button>
+      <button title="URL">[URL]</button>
+      <button title="Smilies">😊</button>
     </div>
-
-    <div class="forum-row">
-      <div class="forum-icon">🛒</div>
-      <div class="forum-info">
-        <div class="forum-name"><a href="#">Buy / Sell / Trade</a></div>
-        <div class="forum-desc">Selling something? Looking for something? Post here. No refunds. No guarantees. No exceptions.</div>
-        <div class="forum-moderator">Moderator: <a href="#">TheBoss_Official</a></div>
-      </div>
-      <div class="forum-stats"><span class="num">2,780</span>Topics</div>
-      <div class="forum-stats"><span class="num">11,230</span>Posts</div>
-      <div class="forum-lastpost">
-        <div class="lp-title"><a href="#">selling protein powder, barely used (it is sand)</a></div>
-        <div class="lp-meta">by <a href="#">Charlie_Smiles</a><br>Mar 31, 2026 — 9:44 AM</div>
-      </div>
+    <textarea placeholder="Write your reply here... (Note: Forum moderators are watching. Especially R0B0T_UNIT_7, who is a real robot.)"></textarea>
+    <div class="form-btns">
+      <button class="btn-submit" title="This button does nothing">Post Reply</button>
+      <button class="btn-preview" title="This button also does nothing">Preview</button>
     </div>
-
-    <div class="forum-row">
-      <div class="forum-icon">⚠️</div>
-      <div class="forum-info">
-        <div class="forum-name"><a href="#">Scam Alerts</a></div>
-        <div class="forum-desc">Warn others about scams you have fallen for. No shame. It happens to everyone apparently.</div>
-        <div class="forum-moderator">Moderator: <a href="#">Charlie_Smiles</a></div>
-      </div>
-      <div class="forum-stats"><span class="num">943</span>Topics</div>
-      <div class="forum-stats"><span class="num">7,819</span>Posts</div>
-      <div class="forum-lastpost">
-        <div class="lp-title"><a href="#">i ordered a robot and it was just a guy</a></div>
-        <div class="lp-meta">by <a href="#">[DELETED USER]</a><br>Apr 3, 2026 — 2:55 PM</div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- FORUM STATS -->
-  <div id="forum-stats-bar">
-    <div>
-      Total posts: <strong>224,695</strong> &nbsp;|&nbsp;
-      Total topics: <strong>20,378</strong> &nbsp;|&nbsp;
-      Total members: <strong>8,841</strong>
-    </div>
-    <div>
-      Newest member: <strong><a href="#">AllensNeighbour</a></strong>
+    <div style="font-size:9px; color:#888; margin-top:5px;">
+      ⚠ By posting you agree to the Fake-stuff.net Terms of Service. Do not claim that any forum member is not a robot. This is a violation of Forum Rule 7(b).
     </div>
   </div>
 
-  <!-- ONLINE USERS -->
-  <div id="online-box">
-    <div id="online-header">Who is Online</div>
-    <div id="online-body">
-      <strong>Users browsing this forum:</strong>
-      <a href="#">TheBoss_Official</a>,
-      <a href="#">Charlie_Smiles</a>,
-      <a href="#">AllensNeighbour</a>,
-      <a href="#">GlepGlopGlorp</a>,
-      <a href="#">AlanNotARobot</a>,
-      and <strong>14</strong> guests<br>
-      <span style="color:#888;">Most users ever online: <strong>1,204</strong> on January 1, 2007, 12:00 AM</span>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <div id="forum-footer">
-    Powered by <strong>FakeBB 2.0</strong> &nbsp;|&nbsp; &copy; 2026 Fake-stuff.com &nbsp;|&nbsp; All Rights Reserved<br>
-    <a href="#">Rules</a> &nbsp;|&nbsp;
+  <!-- ══ FOOTER ══ -->
+  <div id="footer">
+    Powered by <strong>FakeBB 2.0</strong> &nbsp;|&nbsp; &copy; 2007 Fake-stuff.net &nbsp;|&nbsp; All Rights Reserved &nbsp;|&nbsp;
     <a href="#">Privacy Policy</a> &nbsp;|&nbsp;
     <a href="#">Contact Admin</a> &nbsp;|&nbsp;
-    <a href="#">Advertise</a><br>
-    <span style="font-size:9px; color:#8899aa;">Fake-stuff.com is not responsible for any information found on this website, including information that turns out to be true.</span>
+    <span style="color:#aaa;">Server time: April 3, 2007 – 19:22 UTC</span>
   </div>
 
 </div>
