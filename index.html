@@ -108,40 +108,78 @@
 </head>
 <body>
 
-<h1>Fake Stuff List (currently)</h1>
-<p class="subtitle">A carefully selected list.</p>
+<h1 data-i18n="title">Fake Stuff List</h1>
+<p class="subtitle" data-i18n="subtitle">A carefully selected list.</p>
 
 <div class="grid">
 
   <div class="item">
     <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Skyline_der_Stadt_Bielefeld.jpg" alt="Bielefeld" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="caption">Bielefeld, Germany</div>
+    <div class="caption" data-i18n="bielefeld">Bielefeld, Germany</div>
   </div>
 
   <div class="item">
-    <img src="https://cdn.pixabay.com/photo/2018/06/14/19/22/duck-3475449_1280.jpg" alt="Schnabeltier" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="caption">The platypus</div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Duck-billed_platypus_%28Ornithorhynchus_anatinus%29_surfacing_Scottsdale.jpg/960px-Duck-billed_platypus_%28Ornithorhynchus_anatinus%29_surfacing_Scottsdale.jpg" alt="Schnabeltier" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="caption" data-i18n="platypus">The platypus</div>
   </div>
 
- <div class="item">
+  <div class="item">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Anguilla_anguilla.jpg/330px-Anguilla_anguilla.jpg" alt="Aal" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
          style="object-position: left">
-    <div class="caption">The Eel</div>
+    <div class="caption" data-i18n="eel">The Eel</div>
   </div>
 
   <div class="item">
-    <div class="img-placeholder" style="display:flex">Your suggestion</div>
-    <div class="caption">Your suggestion</div>
+    <div class="img-placeholder" style="display:flex" data-i18n="suggestion_placeholder">Your suggestion</div>
+    <div class="caption" data-i18n="suggestion_caption">Your suggestion</div>
   </div>
 
 </div>
 
-  
-<p class="suggestion">If you have suggestions for more fake stuff, please send me an email: <a href="mailto:Extra-Fake-Stuff@fake-stuff.com">Extra-Fake-Stuff@fake-stuff.com</a></p>
+
+<p class="suggestion">
+  <span data-i18n="suggestion_text">If you have suggestions for more Fake Stuff, please send me an email:</span>
+  <a href="mailto:Extra-Fake-Stuff@fake-stuff.com">Extra-Fake-Stuff@fake-stuff.com</a>
+</p>
 
 
 <footer>© 2026</footer>
 
+<script>
+  const translations = {
+    en: {
+      title:                "Fake Stuff List",
+      subtitle:             "A carefully selected list.",
+      bielefeld:            "Bielefeld, Germany",
+      platypus:             "The platypus",
+      eel:                  "The Eel",
+      suggestion_placeholder: "Your suggestion",
+      suggestion_caption:   "Your suggestion",
+      suggestion_text:      "If you have suggestions for more Fake Stuff, please send me an email:"
+    },
+    de: {
+      title:                "Fake Stuff Liste",
+      subtitle:             "Eine sorgfältig ausgewählte Liste.",
+      bielefeld:            "Bielefeld, Deutschland",
+      platypus:             "Das Schnabeltier",
+      eel:                  "Der Aal",
+      suggestion_placeholder: "Dein Vorschlag",
+      suggestion_caption:   "Dein Vorschlag",
+      suggestion_text:      "Wenn du Vorschläge für mehr Fake Stuff hast, schreib mir eine E-Mail:"
+    }
+  };
+
+  const lang = navigator.language.startsWith("de") ? "de" : "en";
+  const t = translations[lang];
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (t[key]) el.textContent = t[key];
+  });
+
+  document.documentElement.lang = lang;
+  document.title = t.title;
+</script>
 
 </body>
 </html>
