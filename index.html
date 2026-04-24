@@ -58,6 +58,15 @@
       justify-content: center;
       font-size: 80px;
       border-radius: 4px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+
+    .item img:hover,
+    .item .emoji:hover {
+      transform: scale(1.04);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
     }
 
     .caption {
@@ -66,6 +75,7 @@
       color: #555;
       text-align: center;
       font-style: italic;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     }
 
     .img-placeholder {
@@ -96,8 +106,48 @@
       color: #111;
     }
 
+    #counter-widget {
+      position: absolute;
+      right: 32px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+    }
+
+    #counter-widget .bubble {
+      background: #f0f0f0;
+      border: 1px solid #ddd;
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-family: Georgia, serif;
+      font-size: 13px;
+      color: #555;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    #like-btn {
+      cursor: pointer;
+      transition: color 0.15s ease;
+    }
+
+    #like-btn:hover {
+      color: #c0392b;
+    }
+
+    #like-btn.liked {
+      color: #c0392b;
+    }
+
     footer {
-      text-align: center;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 11px;
       color: #979797;
       padding: 32px;
@@ -143,7 +193,13 @@
 </p>
 
 
-<footer>© 2026</footer>
+<footer>
+  © 2026
+  <div id="counter-widget">
+    <div class="bubble" id="like-btn">♥ <span id="like-count">…</span></div>
+    <div class="bubble">👁 <span id="view-count">…</span></div>
+  </div>
+</footer>
 
 <script>
   const translations = {
@@ -179,6 +235,33 @@
 
   document.documentElement.lang = lang;
   document.title = t.title;
+
+  const NS = "fake-stuff-com";
+  const btn = document.getElementById("like-btn");
+  const likeCountEl = document.getElementById("like-count");
+  const viewCountEl = document.getElementById("view-count");
+
+  // View counter — increment on every visit
+  fetch(`https://api.counterapi.dev/v1/${NS}/page-views/up`)
+    .then(r => r.json())
+    .then(d => { viewCountEl.textContent = d.count ?? "—"; })
+    .catch(() => { viewCountEl.textContent = "—"; });
+
+  // Like counter — load current value
+  fetch(`https://api.counterapi.dev/v1/${NS}/page-likes`)
+    .then(r => r.json())
+    .then(d => { likeCountEl.textContent = d.count ?? "—"; })
+    .catch(() => { likeCountEl.textContent = "—"; });
+
+  // Toggle like
+  btn.addEventListener("click", () => {
+    const liked = btn.classList.toggle("liked");
+    const endpoint = liked ? "up" : "down";
+    fetch(`https://api.counterapi.dev/v1/${NS}/page-likes/${endpoint}`)
+      .then(r => r.json())
+      .then(d => { likeCountEl.textContent = d.count ?? "—"; })
+      .catch(() => {});
+  });
 </script>
 
 </body>
