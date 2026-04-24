@@ -251,10 +251,17 @@
     return d.result;
   }
 
-  // View counter — atomares Increment bei jedem Aufruf
-  redis("incr/views")
-    .then(v => { viewCountEl.textContent = v; })
-    .catch(() => { viewCountEl.textContent = "—"; });
+  // View counter — nur einmal pro Browser zählen
+  if (!localStorage.getItem("visited")) {
+    localStorage.setItem("visited", "1");
+    redis("incr/views")
+      .then(v => { viewCountEl.textContent = v; })
+      .catch(() => { viewCountEl.textContent = "—"; });
+  } else {
+    redis("get/views")
+      .then(v => { viewCountEl.textContent = v || 0; })
+      .catch(() => { viewCountEl.textContent = "—"; });
+  }
 
   // Like counter — aktuellen Wert laden
   redis("get/likes")
