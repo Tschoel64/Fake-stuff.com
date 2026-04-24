@@ -236,30 +236,36 @@
   document.documentElement.lang = lang;
   document.title = t.title;
 
-  const NS = "fake-stuff-com";
+  const UPSTASH_URL   = "https://ethical-fowl-93502.upstash.io";
+  const UPSTASH_TOKEN = "gQAAAAAAAW0-AAIgcDI3ZmExYjIxNjJlMTU0OTQxOWY0MDViYWU2M2YyMzU4NQ";
+
   const btn = document.getElementById("like-btn");
   const likeCountEl = document.getElementById("like-count");
   const viewCountEl = document.getElementById("view-count");
 
-  // View counter — increment on every visit
-  fetch(`https://api.counterapi.dev/v1/${NS}/page-views/up`)
-    .then(r => r.json())
-    .then(d => { viewCountEl.textContent = d.count ?? "—"; })
+  async function redis(command) {
+    const r = await fetch(`${UPSTASH_URL}/${command}`, {
+      headers: { Authorization: `Bearer ${UPSTASH_TOKEN}` }
+    });
+    const d = await r.json();
+    return d.result;
+  }
+
+  // View counter — atomares Increment bei jedem Aufruf
+  redis("incr/views")
+    .then(v => { viewCountEl.textContent = v; })
     .catch(() => { viewCountEl.textContent = "—"; });
 
-  // Like counter — load current value
-  fetch(`https://api.counterapi.dev/v1/${NS}/page-likes`)
-    .then(r => r.json())
-    .then(d => { likeCountEl.textContent = d.count ?? "—"; })
+  // Like counter — aktuellen Wert laden
+  redis("get/likes")
+    .then(v => { likeCountEl.textContent = v || 0; })
     .catch(() => { likeCountEl.textContent = "—"; });
 
   // Toggle like
   btn.addEventListener("click", () => {
     const liked = btn.classList.toggle("liked");
-    const endpoint = liked ? "up" : "down";
-    fetch(`https://api.counterapi.dev/v1/${NS}/page-likes/${endpoint}`)
-      .then(r => r.json())
-      .then(d => { likeCountEl.textContent = d.count ?? "—"; })
+    redis(liked ? "incr/likes" : "decr/likes")
+      .then(v => { likeCountEl.textContent = Math.max(0, v); })
       .catch(() => {});
   });
 </script>
