@@ -263,7 +263,11 @@
       .catch(() => { viewCountEl.textContent = "—"; });
   }
 
-  // Like counter — aktuellen Wert laden
+  // Like counter — Zustand aus localStorage wiederherstellen
+  if (localStorage.getItem("liked") === "1") {
+    btn.classList.add("liked");
+  }
+
   redis("get/likes")
     .then(v => { likeCountEl.textContent = v || 0; })
     .catch(() => { likeCountEl.textContent = "—"; });
@@ -271,6 +275,7 @@
   // Toggle like
   btn.addEventListener("click", () => {
     const liked = btn.classList.toggle("liked");
+    localStorage.setItem("liked", liked ? "1" : "0");
     redis(liked ? "incr/likes" : "decr/likes")
       .then(v => { likeCountEl.textContent = Math.max(0, v); })
       .catch(() => {});
