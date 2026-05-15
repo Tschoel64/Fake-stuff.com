@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/x-icon" src="https://raw.githubusercontent.com/Tschoel64/Fake-stuff.com/refs/heads/main/favicon.ico">
-  <title>Fake Stuff List (currently)</title>
+  <title>Fake Stuff List</title>
   <style>
     body {
       margin: 0;
@@ -34,9 +34,9 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(5, 200px);
       gap: 40px 32px;
-      max-width: 900px;
+      max-width: 1208px;
       margin: 0 auto;
       padding: 0 40px 80px;
     }
@@ -47,26 +47,72 @@
       align-items: center;
     }
 
-    .item img,
-    .item .emoji {
+    .card {
       width: 100%;
       aspect-ratio: 1;
+      perspective: 800px;
+      cursor: pointer;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s ease;
+    }
+
+    .card:hover .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front,
+    .card-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-front img,
+    .card-front .emoji {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
+      display: block;
+    }
+
+    .card-front .img-placeholder {
+      width: 100%;
+      height: 100%;
+      background: #f0f0f0;
+      border: 2px dashed #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #aaa;
+      text-align: center;
+      box-sizing: border-box;
+      padding: 16px;
+      line-height: 1.6;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
       background: #f5f5f5;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 80px;
-      border-radius: 4px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      cursor: pointer;
-    }
-
-    .item img:hover,
-    .item .emoji:hover {
-      transform: scale(1.04);
-      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #333;
     }
 
     .caption {
@@ -78,21 +124,6 @@
       text-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     }
 
-    .img-placeholder {
-      width: 100%;
-      aspect-ratio: 1;
-      background: #f0f0f0;
-      border: 2px dashed #ccc;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      color: #aaa;
-      text-align: center;
-      border-radius: 4px;
-      box-sizing: border-box;
-      padding: 16px;
-      line-height: 1.6;
-    }
 
     .suggestion {
       text-align: center;
@@ -164,29 +195,102 @@
 <div class="grid">
 
   <div class="item">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Skyline_der_Stadt_Bielefeld.jpg" alt="Bielefeld" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Skyline_der_Stadt_Bielefeld.jpg" alt="Bielefeld">
+        </div>
+        <div class="card-back">
+          <span data-i18n="bielefeld_back"></span>
+        </div>
+      </div>
+    </div>
     <div class="caption" data-i18n="bielefeld">Bielefeld, Germany</div>
   </div>
 
   <div class="item">
-    <img src="https://wallpapercat.com/w/full/2/d/a/1051356-2048x1364-desktop-hd-platypus-background-photo.jpg" alt="Schnabeltier" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Meteosat-12-fci-march-equinox-2025-noon.jpg/1920px-Meteosat-12-fci-march-equinox-2025-noon.jpg" alt="Round Earth">
+        </div>
+        <div class="card-back">
+          <span data-i18n="roundearth_back"></span>
+        </div>
+      </div>
+    </div>
+    <div class="caption" data-i18n="roundearth">The Round Earth Theory</div>
+  </div>
+
+  <div class="item">
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://wallpapercat.com/w/full/2/d/a/1051356-2048x1364-desktop-hd-platypus-background-photo.jpg" alt="Schnabeltier">
+        </div>
+        <div class="card-back">
+          <span data-i18n="platypus_back"></span>
+        </div>
+      </div>
+    </div>
     <div class="caption" data-i18n="platypus">The platypus</div>
   </div>
 
   <div class="item">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Anguilla_anguilla.jpg/330px-Anguilla_anguilla.jpg" alt="Aal" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-         style="object-position: left">
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Anguilla_anguilla.jpg/330px-Anguilla_anguilla.jpg" alt="Aal" style="object-position: left">
+        </div>
+        <div class="card-back">
+          <span data-i18n="eel_back"></span>
+        </div>
+      </div>
+    </div>
     <div class="caption" data-i18n="eel">The Eel</div>
   </div>
 
   <div class="item">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Lipari-Obsidienne_%285%29.jpg/500px-Lipari-Obsidienne_%285%29.jpg" alt="Obsidian" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Lipari-Obsidienne_%285%29.jpg/500px-Lipari-Obsidienne_%285%29.jpg" alt="Obsidian">
+        </div>
+        <div class="card-back">
+          <span data-i18n="obsidian_back"></span>
+        </div>
+      </div>
+    </div>
     <div class="caption" data-i18n="obsidian">Obsidian</div>
     <div class="caption" style="margin-top:2px;" data-i18n="obsidian_suggestion">suggestion by EGGyBoy</div>
   </div>
 
   <div class="item">
-    <div class="img-placeholder" style="display:flex" data-i18n="suggestion_placeholder">Your suggestion</div>
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/California_Drought_Dry_Lakebed_2009.jpg" alt="Klimawandel">
+        </div>
+        <div class="card-back">
+          <span data-i18n="climate_back"></span>
+        </div>
+      </div>
+    </div>
+    <div class="caption" data-i18n="climate">Climate Change</div>
+    <div class="caption" style="margin-top:2px;" data-i18n="climate_suggestion">suggestion by GetPawned</div>
+  </div>
+
+  <div class="item">
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <div class="img-placeholder" data-i18n="suggestion_placeholder">Your suggestion</div>
+        </div>
+        <div class="card-back">
+          <span data-i18n="suggestion_back"></span>
+        </div>
+      </div>
+    </div>
     <div class="caption" data-i18n="suggestion_caption">Your suggestion</div>
   </div>
 
@@ -219,7 +323,17 @@
       suggestion_caption:   "Your suggestion",
       obsidian:             "Obsidian",
       obsidian_suggestion:  "suggestion by EGGyBoy",
-      suggestion_text:      "If you have suggestions for more Fake Stuff, please send me an email:"
+      suggestion_text:      "If you have suggestions for more Fake Stuff, please send me an email:",
+      bielefeld_back:       "According to the Bielefeld Conspiracy, this city doesn't exist. Its 340,000 inhabitants are just part of an elaborate cover-up.",
+      platypus_back:        "It is a mammal, but it lays eggs.",
+      eel_back:             "We still don't know how they reproduce",
+      obsidian_back:        "Obsidian only exists in Minecraft.",
+      suggestion_back:      "Could be anything. The world is full of things that shouldn't exist.",
+      climate:              "Climate Change",
+      climate_suggestion:   "suggestion by GetPawned",
+      climate_back:         "The earth looks fine to me.",
+      roundearth:           "The Round Earth Theory",
+      roundearth_back:      "All my maps are printed flat. So why should the Earth be round?"
     },
     de: {
       title:                "Fake Stuff Liste",
@@ -231,7 +345,17 @@
       suggestion_caption:   "Dein Vorschlag",
       obsidian:             "Obsidian",
       obsidian_suggestion:  "Vorschlag von EGGyBoy",
-      suggestion_text:      "Wenn du Vorschläge für mehr Fake Stuff hast, schreib mir eine E-Mail:"
+      suggestion_text:      "Wenn du Vorschläge für mehr Fake Stuff hast, schreib mir eine E-Mail:",
+      bielefeld_back:       "Laut der Bielefeld-Verschwörung existiert diese Stadt nicht. Ihre 340.000 Einwohner sind Teil einer aufwendigen Vertuschung.",
+      platypus_back:        "Ist ein Säugetier legt aber Eier.",
+      eel_back:             "Wir wissen immer noch nicht, wie sie sich fortpflanzen.",
+      obsidian_back:        "Obsidian gibt es nur in Minecraft.",
+      suggestion_back:      "Könnte alles Mögliche sein. Die Welt ist voll von Dingen, die es eigentlich nicht geben dürfte.",
+      climate:              "Klimawandel",
+      climate_suggestion:   "Vorschlag von GetPawned",
+      climate_back:         "Die Erde sieht für mich in Ordnung aus.",
+      roundearth:           "Die Runde-Erde-Theorie",
+      roundearth_back:      "Alle meine Landkarten sind flach gedruckt. Also warum sollte die Erde rund sein?"
     }
   };
 
