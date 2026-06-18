@@ -1,0 +1,12 @@
+{
+  "name": "TafelText – Lokaler Text-Scanner",
+  "short_name": "TafelText",
+  "description": "Erkennt gedruckten Text und Handschrift direkt im Browser – ohne Server.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1f2b22",
+  "theme_color": "#1f2b22",
+  "lang": "de",
+  "icons": []
+}
