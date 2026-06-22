@@ -13,26 +13,17 @@
 
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
 
-<header class="board">
-  <div class="board-inner">
-    <p class="eyebrow">Für Schulen · läuft komplett im Browser</p>
-    <h1>Tafel<span>Text</span></h1>
-    <p class="tagline">Fotografiere oder lade ein Arbeitsblatt hoch – gedruckter Text und Handschrift werden direkt zu bearbeitbarem Text.</p>
-
-    <div class="privacy-badge-wrap">
-      <svg class="circle-mark" viewBox="0 0 220 70" aria-hidden="true">
-        <path d="M14 38 C 10 14, 60 4, 110 6 C 168 8, 212 16, 206 36 C 200 58, 140 66, 100 64 C 50 62, 12 56, 16 40" />
-      </svg>
-      <p class="privacy-badge">
-        <strong>100&nbsp;% lokal.</strong> Bilder und Text verlassen diesen Browser nie – keine Server, keine Cloud, kein Tracking.
-      </p>
-    </div>
+<header class="site-header">
+  <div class="header-inner">
+    <h1>TafelText</h1>
+    <p class="tagline">Bild hochladen oder fotografieren – Text wird direkt erkannt.</p>
+    <p class="privacy-note">100&nbsp;% lokal im Browser. Keine Server, kein Tracking.</p>
   </div>
 </header>
 
 <main id="main">
 
-  <section class="sheet" aria-labelledby="step1-heading">
+  <section class="card" aria-labelledby="step1-heading">
     <h2 id="step1-heading"><span class="step-no">1</span> Vorlage hinzufügen</h2>
 
     <div class="input-row">
@@ -62,7 +53,7 @@
     <ul id="pageList" class="page-list" aria-live="polite"></ul>
   </section>
 
-  <section class="sheet" id="prepSection" aria-labelledby="step2-heading" hidden>
+  <section class="card" id="prepSection" aria-labelledby="step2-heading" hidden>
     <h2 id="step2-heading"><span class="step-no">2</span> Bild prüfen &amp; Einstellungen</h2>
 
     <div class="prep-grid">
@@ -128,7 +119,7 @@
     </div>
   </section>
 
-  <section class="sheet" id="progressSection" aria-labelledby="progress-heading" hidden aria-live="polite">
+  <section class="card" id="progressSection" aria-labelledby="progress-heading" hidden aria-live="polite">
     <h2 id="progress-heading"><span class="step-no">3</span> Erkennung läuft …</h2>
     <div class="progress-track">
       <div id="progressFill" class="progress-fill"></div>
@@ -137,7 +128,7 @@
     <button type="button" id="cancelBtn" class="btn btn-ghost">Abbrechen</button>
   </section>
 
-  <section class="sheet" id="resultSection" aria-labelledby="result-heading" hidden>
+  <section class="card" id="resultSection" aria-labelledby="result-heading" hidden>
     <h2 id="result-heading"><span class="step-no">4</span> Ergebnis</h2>
     <p class="hint">Der erkannte Text ist editierbar – kleine Fehler lassen sich direkt korrigieren.</p>
     <textarea id="resultText" rows="14" spellcheck="true" aria-label="Erkannter Text"></textarea>
