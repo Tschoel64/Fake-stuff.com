@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TafelText – Lokaler Text-Scanner für Schulen</title>
+<meta name="description" content="Erkennt gedruckten Text und Handschrift direkt im Browser – ohne Server, ohne Internetverbindung, ohne Datenübertragung.">
+<link rel="icon" href="data:,">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <h1>TafelText</h1>
+    <p class="tagline">Bild hochladen oder fotografieren – Text wird direkt erkannt.</p>
+    <p class="privacy-note">100&nbsp;% lokal im Browser. Keine Server, kein Tracking.</p>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="card" aria-labelledby="step1-heading">
+    <h2 id="step1-heading"><span class="step-no">1</span> Vorlage hinzufügen</h2>
+
+    <div class="input-row">
+      <div id="dropzone" class="dropzone" tabindex="0" role="button"
+           aria-label="Bild hierher ziehen oder klicken, um eine Datei auszuwählen">
+        <input type="file" id="fileInput" accept="image/*" multiple hidden>
+        <p class="dz-icon" aria-hidden="true">⤓</p>
+        <p><strong>Bild(er) hier ablegen</strong> oder klicken zum Auswählen</p>
+        <p class="dz-hint">JPG, PNG, WEBP · mehrere Seiten möglich</p>
+      </div>
+
+      <div class="or-divider"><span>oder</span></div>
+
+      <div class="camera-box">
+        <button type="button" id="cameraBtn" class="btn btn-secondary">📷 Kamera öffnen</button>
+        <p class="dz-hint">Direkt mit Webcam / Dokumentenkamera fotografieren</p>
+        <div id="cameraStage" class="camera-stage hidden">
+          <video id="cameraVideo" playsinline autoplay muted></video>
+          <div class="camera-controls">
+            <button type="button" id="captureBtn" class="btn btn-primary">Aufnehmen</button>
+            <button type="button" id="cameraCloseBtn" class="btn btn-ghost">Abbrechen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul id="pageList" class="page-list" aria-live="polite"></ul>
+  </section>
+
+  <section class="card" id="prepSection" aria-labelledby="step2-heading" hidden>
+    <h2 id="step2-heading"><span class="step-no">2</span> Bild prüfen &amp; Einstellungen</h2>
+
+    <div class="prep-grid">
+      <div class="preview-pane">
+        <canvas id="previewCanvas"></canvas>
+        <div class="rotate-controls">
+          <button type="button" id="rotateLeftBtn" class="btn btn-ghost" aria-label="90° gegen den Uhrzeigersinn drehen">⟲ Drehen</button>
+          <button type="button" id="rotateRightBtn" class="btn btn-ghost" aria-label="90° im Uhrzeigersinn drehen">⟳ Drehen</button>
+        </div>
+      </div>
+
+      <div class="controls-pane">
+
+        <fieldset class="control-group">
+          <legend>Textart</legend>
+          <div class="radio-row">
+            <label class="radio-pill">
+              <input type="radio" name="mode" value="printed" checked>
+              <span>🖨️ Gedruckter Text</span>
+            </label>
+            <label class="radio-pill">
+              <input type="radio" name="mode" value="handwriting">
+              <span>✍️ Handschrift</span>
+            </label>
+          </div>
+          <p class="hint" id="modeHint">Am genauesten bei klarem, gut beleuchtetem Druck.</p>
+        </fieldset>
+
+        <fieldset class="control-group">
+          <legend>Sprache</legend>
+          <select id="langSelect">
+            <option value="deu">Deutsch</option>
+            <option value="eng">Englisch</option>
+            <option value="deu+eng" selected>Deutsch + Englisch</option>
+          </select>
+        </fieldset>
+
+        <fieldset class="control-group">
+          <legend>Bildaufbereitung</legend>
+          <label class="slider-row">
+            <span>Kontrast</span>
+            <input type="range" id="contrastRange" min="-50" max="100" value="20">
+          </label>
+          <label class="slider-row">
+            <span>Helligkeit</span>
+            <input type="range" id="brightnessRange" min="-60" max="60" value="0">
+          </label>
+          <label class="checkbox-row">
+            <input type="checkbox" id="bwToggle" checked>
+            <span>In Schwarz-Weiß umwandeln (empfohlen bei Fotos)</span>
+          </label>
+          <label class="slider-row" id="thresholdRow">
+            <span>Schwarz/Weiß-Schwelle</span>
+            <input type="range" id="thresholdRange" min="0" max="255" value="150">
+          </label>
+        </fieldset>
+
+        <div class="queue-actions">
+          <button type="button" id="addToQueueBtn" class="btn btn-secondary">+ Weitere Seite hinzufügen</button>
+          <button type="button" id="scanBtn" class="btn btn-primary btn-big">Text erkennen</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" id="progressSection" aria-labelledby="progress-heading" hidden aria-live="polite">
+    <h2 id="progress-heading"><span class="step-no">3</span> Erkennung läuft …</h2>
+    <div class="progress-track">
+      <div id="progressFill" class="progress-fill"></div>
+    </div>
+    <p id="progressLabel" class="hint">Initialisiere …</p>
+    <button type="button" id="cancelBtn" class="btn btn-ghost">Abbrechen</button>
+  </section>
+
+  <section class="card" id="resultSection" aria-labelledby="result-heading" hidden>
+    <h2 id="result-heading"><span class="step-no">4</span> Ergebnis</h2>
+    <p class="hint">Der erkannte Text ist editierbar – kleine Fehler lassen sich direkt korrigieren.</p>
+    <textarea id="resultText" rows="14" spellcheck="true" aria-label="Erkannter Text"></textarea>
+    <p id="resultStats" class="hint"></p>
+    <div class="result-actions">
+      <button type="button" id="copyBtn" class="btn btn-secondary">📋 Kopieren</button>
+      <button type="button" id="downloadTxtBtn" class="btn btn-secondary">⬇ Als .txt speichern</button>
+      <button type="button" id="printBtn" class="btn btn-secondary">🖨️ Drucken / als PDF</button>
+      <button type="button" id="resetBtn" class="btn btn-ghost">Neu starten</button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>TafelText läuft vollständig offline im Browser (Tesseract.js / WebAssembly). Kein Tracking, keine Cookies, keine Server-Anfragen.</p>
+  <p><a href="https://github.com/tesseract-ocr/tesseract" target="_blank" rel="noopener">Texterkennung: Tesseract OCR</a> · Quellcode auf GitHub</p>
+</footer>
+
+<div id="printArea" class="print-only" aria-hidden="true"></div>
+
+<script src="vendor/tesseract/tesseract.min.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
